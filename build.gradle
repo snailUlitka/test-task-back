@@ -24,7 +24,6 @@ dependencies {
 
 	// For tests
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.apache.httpcomponents:httpclient'
 
 	// H2 database
 	runtimeOnly 'com.h2database:h2:2.2.220'
@@ -32,6 +31,9 @@ dependencies {
 	// Lombok
 	compileOnly 'org.projectlombok:lombok:1.18.20'
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+	// Liquibase
+//	implementation 'org.liquibase:liquibase-core'
 }
 
 tasks.named('test') {
