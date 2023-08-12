@@ -19,7 +19,7 @@ public class BackApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/stock/**")
-                        .allowedMethods("POST", "GET")
+                        .allowedMethods("POST", "GET", "PATCH")
                         .allowedOrigins("http://localhost:3000");
             }
         };
