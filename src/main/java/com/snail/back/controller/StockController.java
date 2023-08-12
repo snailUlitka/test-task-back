@@ -3,6 +3,7 @@ package com.snail.back.controller;
 import com.snail.back.dto.Stock;
 import com.snail.back.entity.StockEntity;
 import com.snail.back.exception.StockAlreadyExistException;
+import com.snail.back.exception.StockNotFound;
 import com.snail.back.service.StockService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,21 @@ public class StockController {
         return new ResponseEntity<>(stocks, HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> patchStock(@PathVariable Long id, @RequestBody StockEntity stock)
+            throws StockNotFound {
+        stockService.patch(id, stock);
+
+        return new ResponseEntity<>("Акция изменена", HttpStatus.OK);
+    }
+
     @ExceptionHandler(StockAlreadyExistException.class)
     public ResponseEntity<String> handleException(StockAlreadyExistException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(StockNotFound.class)
+    public ResponseEntity<String> handleException(StockNotFound e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

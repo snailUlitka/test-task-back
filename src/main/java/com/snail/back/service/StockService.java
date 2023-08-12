@@ -4,10 +4,11 @@ import com.snail.back.converter.StockConverter;
 import com.snail.back.dto.Stock;
 import com.snail.back.entity.StockEntity;
 import com.snail.back.exception.StockAlreadyExistException;
+import com.snail.back.exception.StockNotFound;
 import com.snail.back.repository.StockRepo;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,5 +52,23 @@ public class StockService {
         }
 
         return stocks;
+    }
+
+    public void patch(Long id, StockEntity patchStock) throws StockNotFound {
+        StockEntity existStock = stockRepo.findById(id).orElseThrow(() -> new StockNotFound("Акция не найдена"));
+
+        if (patchStock.getDate() != null) {
+            existStock.setDate(patchStock.getDate());
+        }
+
+        if (patchStock.getName() != null) {
+            existStock.setName(patchStock.getName());
+        }
+
+        if (patchStock.getCost() != null) {
+            existStock.setCost(patchStock.getCost());
+        }
+
+        stockRepo.save(existStock);
     }
 }
