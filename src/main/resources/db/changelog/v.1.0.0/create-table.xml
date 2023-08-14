@@ -5,11 +5,16 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
     <changeSet id="create-table-stocks" author="snail">
+        <createSequence cycle="false"
+                        incrementBy="1"
+                        sequenceName="id_seq"
+                        startValue="1"/>
+
         <createTable tableName="stocks">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true"/>
+            <column name="id" type="bigint" defaultValueSequenceNext="id_seq">
+                <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="date" type="int">
+            <column name="date" type="bigint">
                     <constraints nullable="false"/>
             </column>
             <column name="name" type="varchar(64)">
