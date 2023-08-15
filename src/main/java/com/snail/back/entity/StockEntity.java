@@ -1,25 +1,28 @@
 package com.snail.back.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "stocks")
 public class StockEntity {
-    @Column(name = "id", unique = true)
+
+    @Id
+    @Column(value = "id")
     private Long id;
 
-    @Column(name = "date", nullable = false)
+    @Column(value = "date")
     private Long date;
 
-    @Column(name = "name", nullable = false)
+    @Column(value = "name")
     private String name;
 
-    @Column(name = "cost", nullable = false)
+    @Column(value = "cost")
     private Integer cost;
 }
