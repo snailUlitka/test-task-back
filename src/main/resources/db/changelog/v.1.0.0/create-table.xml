@@ -5,20 +5,20 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
     <changeSet id="create-table-stocks" author="snail">
-        <createSequence sequenceName="id_seq" cacheSize="1" cycle="false" incrementBy="1"
+        <createSequence sequenceName="ID_SEQ" cacheSize="1" cycle="false" incrementBy="1"
                         maxValue="9223372036854775807" minValue="1" startValue="1"/>
 
-        <createTable tableName="stocks">
-            <column name="id" type="bigint" defaultOnNull="true" defaultValueSequenceNext="id_seq">
+        <createTable tableName="STOCKS">
+            <column name="ID" type="bigint" defaultOnNull="true" defaultValueSequenceNext="ID_SEQ">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="date" type="bigint">
+            <column name="DATE" type="bigint">
                     <constraints nullable="false"/>
             </column>
-            <column name="name" type="varchar(64)">
+            <column name="NAME" type="varchar(64)">
                 <constraints nullable="false"/>
             </column>
-            <column name="cost" type="int">
+            <column name="COST" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
